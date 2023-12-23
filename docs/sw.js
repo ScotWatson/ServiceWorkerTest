@@ -22,8 +22,8 @@ self.addEventListener("fetch", function (evt) {
   // if any file is requested that starts with "sw_" and ends with ".js", return "sw.js"
   async function fetchModified() {
     const request = evt.request;
-    console.log(request);
     const requestURL = URL(request.url);
+    sendMessage(requestURL);
     const pathElements = requestURL.pathname.split("/");
     const resourceName = pathElements[pathElements.length - 1];
     if (resourceName.startsWith("sw_") && resourceName.endsWith(".js")) {
@@ -57,7 +57,7 @@ self.addEventListener("fetch", function (evt) {
   }
   async function getResponse() {
     const response = await fetchModified();
-    console.log(response);
+    sendMessage(response.status);
     evt.respondWith(response);
   }
   evt.waitUntil(getResponse());
@@ -72,3 +72,10 @@ self.addEventListener("message", function (evt) {
     self.skipWaiting();
   }
 });
+
+function sendMessage(data) {
+  const clients = self.clients.matchAll();
+  for (const client of clients) {
+    client.postMessage(data);
+  }
+}
