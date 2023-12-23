@@ -27,7 +27,7 @@ async function start( [ evtWindow ] ) {
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
         const holder = document.createElement("span");
-        btn.appendChild(document.createTextNode("<none>"));
+        holder.appendChild(document.createTextNode("<none>"));
         return holder;
       }
       const btn = document.createElement("button");
