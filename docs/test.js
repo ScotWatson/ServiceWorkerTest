@@ -37,11 +37,15 @@ async function start( [ evtWindow ] ) {
       btn.appendChild(document.createTextNode(serviceWorker.scriptURL));
       btn.addEventListener("click", function (evt) {
         const display = document.createElement("div");
+        display.style.display = "block";
+        display.style.position = "absolute";
         display.style.left = "10%";
         display.style.top = "10%";
         display.style.width = "80%";
         display.style.height = "80%";
+        display.style.backgroundColor = "white";
         const closeBtn = document.createElement("button");
+        closeBtn.appendChild(document.createTextNode("Close"));
         display.appendChild(closeBtn);
         closeBtn.addEventListener("click", function () {
           display.remove();
@@ -53,11 +57,20 @@ async function start( [ evtWindow ] ) {
         display.appendChild(pState);
         pState.appendChild(document.createTextNode("state: " + serviceWorker.state));
         document.body.appendChild(display);
+        const claimBtn = document.createElement("button");
+        claimBtn.appendChild(document.createTextNode("Close"));
+        display.appendChild(claimBtn);
+        claimBtn.addEventListener("click", function () {
+          serviceWorker.postMessage({
+            action: "claim",
+          });
+        });
       });
       return btn;
     }
     const pController = document.createElement("p");
     document.body.appendChild(pController);
+    pController.appendChild(createTextNode("Controller: "));
     let controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
     pController.appendChild(controllerBtn);
     navigator.serviceWorker.addEventListener("controllerchange", function (evt) {
