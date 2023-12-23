@@ -25,10 +25,10 @@ async function start( [ evtWindow ] ) {
   try {
     console.log(evtWindow);
     function createServiceWorkerButton(serviceWorker) {
-      const btn = createElement("button");
+      const btn = document.createElement("button");
       btn.appendChild(document.createTextNode(serviceWorker.scriptURL));
       btn.addEventListener("click", function (evt) {
-        const display = createElement("div");
+        const display = document.createElement("div");
         display.style.left = "10%";
         display.style.top = "10%";
         display.style.width = "80%";
