@@ -64,5 +64,11 @@ self.addEventListener("fetch", function (evt) {
 });
 
 self.addEventListener("message", function (evt) {
-  
+  const data = evt.data;
+  if (data.action === "claim") {
+    self.clients.claim();
+  }
+  if (data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
 });
