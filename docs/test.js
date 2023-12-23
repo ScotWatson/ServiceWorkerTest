@@ -24,6 +24,9 @@ const asyncWindow = new Promise(function (resolve, reject) {
 async function start( [ evtWindow ] ) {
   try {
     console.log(evtWindow);
+    navigator.serviceWorker.register("/sw.js", {
+      scope: "/",
+    });
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
         const holder = document.createElement("span");
