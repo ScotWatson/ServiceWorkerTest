@@ -25,7 +25,7 @@ async function start( [ evtWindow ] ) {
   try {
     console.log(evtWindow);
     navigator.serviceWorker.register("/ServiceWorkerTest/sw.js", {
-      scope: "/",
+      scope: "/ServiceWorkerTest/",
     });
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
@@ -78,7 +78,7 @@ async function start( [ evtWindow ] ) {
     createRegistrationBtn.addEventListener("click", function (evt) {
       (async function () {
         await navigator.serviceWorker.register("/ServiceWorkerTest/sw_" + inpId.value + ".js", {
-          scope: "/",
+          scope: "/ServiceWorkerTest/",
         });
         refreshRegistrationTable();
       })();
@@ -126,7 +126,7 @@ async function start( [ evtWindow ] ) {
         cell2.appendChild(createServiceWorkerButton(registration.waiting));
         const cell3 = document.createElement("td");
         row.appendChild(cell3);
-        cell3.appendChild(document.createTextNode(scope));
+        cell3.appendChild(document.createTextNode(registration.scope));
         const cell4 = document.createElement("td");
         row.appendChild(cell4);
         const unregisterBtn = document.createElement("button");
