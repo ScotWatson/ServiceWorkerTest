@@ -66,9 +66,12 @@ async function start( [ evtWindow ] ) {
     document.body.appendChild(createRegistrationBtn);
     createRegistrationBtn.appendChild(document.createTextNode("Create Registration"));
     createRegistrationBtn.addEventListener("click", function (evt) {
-      const registration = await navigator.serviceWorker.register("/sw_" + inpId.value + ".js", {
-        scope: "/",
-      });
+      (async function () {
+        await navigator.serviceWorker.register("/sw_" + inpId.value + ".js", {
+          scope: "/",
+        });
+        refreshRegistrationTable();
+      })();
     });
     const refreshRegistrationTableBtn = document.createElement("button");
     document.body.appendChild(refreshRegistrationTableBtn);
@@ -76,6 +79,29 @@ async function start( [ evtWindow ] ) {
     refreshRegistrationTableBtn.addEventListener("click", function (evt) {
       refreshRegistrationTable();
     });
+    const registrationTable = document.createElement("table");
+    document.body.appendChild(registrationTable);
+    const registrationTableHeader = document.createElement("tr");
+    registrationTable.appendChild(registrationTableHeader);
+    const registrationTableHeader0 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader0);
+    registrationTableHeader0.appendChild(document.createTextNode("active"));
+    const registrationTableHeader1 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader1);
+    registrationTableHeader1.appendChild(document.createTextNode("installing"));
+    const registrationTableHeader2 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader2);
+    registrationTableHeader2.appendChild(document.createTextNode("waiting"));
+    const registrationTableHeader3 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader3);
+    registrationTableHeader3.appendChild(document.createTextNode("scope"));
+    const registrationTableHeader4 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader4);
+    registrationTableHeader4.appendChild(document.createTextNode("unregister"));
+    const registrationTableHeader5 = document.createElement("th");
+    registrationTableHeader.appendChild(registrationTableHeader5);
+    registrationTableHeader5.appendChild(document.createTextNode("update"));
+    refreshRegistrationTable();
     function refreshRegistrationTable() {
       function createRow(registration) {
         const row = document.createElement("tr");
@@ -139,28 +165,6 @@ async function start( [ evtWindow ] ) {
         registrationTable.appendChild(readyRow);
       })();
     }
-    const registrationTable = document.createElement("table");
-    document.body.appendChild(registrationTable);
-    const registrationTableHeader = document.createElement("tr");
-    registrationTable.appendChild(registrationTableHeader);
-    const registrationTableHeader0 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader0);
-    registrationTableHeader0.appendChild(document.createTextNode("active"));
-    const registrationTableHeader1 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader1);
-    registrationTableHeader1.appendChild(document.createTextNode("installing"));
-    const registrationTableHeader2 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader2);
-    registrationTableHeader2.appendChild(document.createTextNode("waiting"));
-    const registrationTableHeader3 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader3);
-    registrationTableHeader3.appendChild(document.createTextNode("scope"));
-    const registrationTableHeader4 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader4);
-    registrationTableHeader4.appendChild(document.createTextNode("unregister"));
-    const registrationTableHeader5 = document.createElement("th");
-    registrationTableHeader.appendChild(registrationTableHeader5);
-    registrationTableHeader5.appendChild(document.createTextNode("update"));
   } catch (e) {
     console.log(e);
   }
