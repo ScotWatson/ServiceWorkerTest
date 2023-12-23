@@ -24,7 +24,7 @@ const asyncWindow = new Promise(function (resolve, reject) {
 async function start( [ evtWindow ] ) {
   try {
     console.log(evtWindow);
-    navigator.serviceWorker.register("/sw.js", {
+    navigator.serviceWorker.register("/ServiceWorkerTest/sw.js", {
       scope: "/",
     });
     function createServiceWorkerButton(serviceWorker) {
@@ -77,7 +77,7 @@ async function start( [ evtWindow ] ) {
     createRegistrationBtn.appendChild(document.createTextNode("Create Registration"));
     createRegistrationBtn.addEventListener("click", function (evt) {
       (async function () {
-        await navigator.serviceWorker.register("/sw_" + inpId.value + ".js", {
+        await navigator.serviceWorker.register("/ServiceWorkerTest/sw_" + inpId.value + ".js", {
           scope: "/",
         });
         refreshRegistrationTable();
