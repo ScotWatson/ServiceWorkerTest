@@ -34,7 +34,7 @@ async function start( [ evtWindow ] ) {
         return holder;
       }
       const btn = document.createElement("button");
-      btn.appendChild(document.createTextNode(serviceWorker.scriptURL));
+      btn.appendChild(document.createTextNode((new URL(serviceWorker.scriptURL)).pathname));
       btn.addEventListener("click", function (evt) {
         const display = document.createElement("div");
         display.style.display = "block";
@@ -52,7 +52,7 @@ async function start( [ evtWindow ] ) {
         });
         const pURL = document.createElement("p");
         display.appendChild(pURL);
-        pURL.appendChild(document.createTextNode("scriptURL: " + URL(serviceWorker.scriptURL).pathname));
+        pURL.appendChild(document.createTextNode("scriptURL: " + serviceWorker.scriptURL));
         const pState = document.createElement("p");
         display.appendChild(pState);
         pState.appendChild(document.createTextNode("state: " + serviceWorker.state));
