@@ -70,7 +70,7 @@ async function start( [ evtWindow ] ) {
     }
     const pController = document.createElement("p");
     document.body.appendChild(pController);
-    pController.appendChild(createTextNode("Controller: "));
+    pController.appendChild(document.createTextNode("Controller: "));
     let controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
     pController.appendChild(controllerBtn);
     navigator.serviceWorker.addEventListener("controllerchange", function (evt) {
