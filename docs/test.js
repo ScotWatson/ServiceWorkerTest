@@ -53,7 +53,8 @@ async function start( [ evtWindow ] ) {
       });
       return btn;
     }
-    const controller = document.createElement("p");
+    const pController = document.createElement("p");
+    document.body.appendChild(pController);
     let controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
     controller.appendChild(controllerBtn);
     navigator.serviceWorker.addEventListener("controllerchange", function (evt) {
@@ -62,13 +63,14 @@ async function start( [ evtWindow ] ) {
       controller.appendChild(controllerBtn);
     });
     const pCreateRegistration = document.createElement("p");
+    document.body.appendChild(pCreateRegistration);
     pCreateRegistration.appendChild(document.createTextNode("sw_"));
     const inpId = document.createElement("input");
     pCreateRegistration.appendChild(inpId);
     inpId.type = "text";
     pCreateRegistration.appendChild(document.createTextNode(".js"));
     const createRegistrationBtn = document.createElement("button");
-    document.body.appendChild(createRegistrationBtn);
+    pCreateRegistration.appendChild(createRegistrationBtn);
     createRegistrationBtn.appendChild(document.createTextNode("Create Registration"));
     createRegistrationBtn.addEventListener("click", function (evt) {
       (async function () {
