@@ -52,13 +52,13 @@ async function start( [ evtWindow ] ) {
         });
         const pURL = document.createElement("p");
         display.appendChild(pURL);
-        pURL.appendChild(document.createTextNode("scriptURL: " + serviceWorker.scriptURL));
+        pURL.appendChild(document.createTextNode("scriptURL: " + URL(serviceWorker.scriptURL).pathname));
         const pState = document.createElement("p");
         display.appendChild(pState);
         pState.appendChild(document.createTextNode("state: " + serviceWorker.state));
         document.body.appendChild(display);
         const claimBtn = document.createElement("button");
-        claimBtn.appendChild(document.createTextNode("Close"));
+        claimBtn.appendChild(document.createTextNode("Claim"));
         display.appendChild(claimBtn);
         claimBtn.addEventListener("click", function () {
           serviceWorker.postMessage({
