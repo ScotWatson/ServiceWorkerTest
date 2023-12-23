@@ -56,11 +56,11 @@ async function start( [ evtWindow ] ) {
     const pController = document.createElement("p");
     document.body.appendChild(pController);
     let controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
-    controller.appendChild(controllerBtn);
+    pController.appendChild(controllerBtn);
     navigator.serviceWorker.addEventListener("controllerchange", function (evt) {
       controllerBtn.remove();
       controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
-      controller.appendChild(controllerBtn);
+      pController.appendChild(controllerBtn);
     });
     const pCreateRegistration = document.createElement("p");
     document.body.appendChild(pCreateRegistration);
