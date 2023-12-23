@@ -26,7 +26,7 @@ self.addEventListener("fetch", function (evt) {
     const pathElements = requestURL.pathname.split("/");
     const resourceName = pathElements[pathElements.length - 1];
     if (resourceName.startsWith("sw_") && resourceName.endsWith(".js")) {
-      return Response.redirect("/sw.js");
+      return Response.redirect("https://scotwatson.github.io/ServiceWorkerTest/sw.js");
 /*
       const newRequest = new Request(requestURL.origin + pathElements.join("/"), {
         method: request.method,
