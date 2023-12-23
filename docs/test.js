@@ -25,6 +25,11 @@ async function start( [ evtWindow ] ) {
   try {
     console.log(evtWindow);
     function createServiceWorkerButton(serviceWorker) {
+      if (serviceWorker === null) {
+        const holder = document.createElement("span");
+        btn.appendChild(document.createTextNode("<none>"));
+        return holder;
+      }
       const btn = document.createElement("button");
       btn.appendChild(document.createTextNode(serviceWorker.scriptURL));
       btn.addEventListener("click", function (evt) {
