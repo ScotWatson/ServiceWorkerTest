@@ -27,6 +27,9 @@ async function start( [ evtWindow ] ) {
     navigator.serviceWorker.register("/ServiceWorkerTest/sw.js", {
       scope: "/ServiceWorkerTest/",
     });
+    navigator.serviceWorker.addEventListener("message", function (evt) {
+      console.log(evt.data);
+    });
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
         const holder = document.createElement("span");
