@@ -91,6 +91,12 @@ async function start( [ evtWindow ] ) {
       });
       return btn;
     }
+    let testFetchBtn = document.createElement("button");
+    document.body.appendChild(testFetchBtn);
+    testFetchBtn.appendChild(document.createTextNode("Test Fetch"));
+    testFetchBtn.addEventListener("click", function (evt) {
+      fetch("sw.js");
+    });
     const pController = document.createElement("p");
     document.body.appendChild(pController);
     pController.appendChild(document.createTextNode("Controller: "));
