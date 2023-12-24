@@ -23,6 +23,7 @@ self.addEventListener("sync", function (evt) {
 self.addEventListener("fetch", function (evt) {
   ++numFetches;
   // if "test.html" is loaded from any scope, return "/ServiceWorkerTest/test.html"
+  // if "test.js" is loaded from any scope, return "/ServiceWorkerTest/test.html"
   async function fetchModified(request) {
     const requestURL = new URL(request.url);
     await sendMessage(requestURL.pathname);
@@ -47,6 +48,32 @@ self.addEventListener("fetch", function (evt) {
       const directResponse = await fetch(request);
       */
       const directResponse = await fetch("https://scotwatson.github.io/ServiceWorkerTest/test.html");
+      return new Response(await directResponse.blob(), {
+        status: directResponse.status,
+        statusText: directResponse.statusText,
+        headers: directResponse.headers,
+      });
+    } else if (requestURL.pathname.endsWith("/test.js")) {
+      await sendMessage("Modified Fetch");
+      /*
+      const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.js", {
+        method: request.method,
+        headers: request.headers,
+        body: request.body,
+//        mode: request.mode,
+        credentials: request.credentials,
+        cache: request.cache,
+        redirect: request.redirect,
+        referrer: request.referrer,
+        referrerPolicy: request.referrerPolicy,
+        integrity: request.integrity,
+        keepalive: request.keepalive,
+        signal: request.signal,
+        priority: request.priority,
+      });
+      const directResponse = await fetch(request);
+      */
+      const directResponse = await fetch("https://scotwatson.github.io/ServiceWorkerTest/test.js");
       return new Response(await directResponse.blob(), {
         status: directResponse.status,
         statusText: directResponse.statusText,
