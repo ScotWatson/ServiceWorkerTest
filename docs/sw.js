@@ -43,11 +43,11 @@ self.addEventListener("fetch", function (evt) {
         priority: request.priority,
       });
       const directResponse = await fetch(request);
-      return new Response(new Blob( [ directResponse.blob(), "\n//", Date().toString() ], {
+      return new Response(directResponse.blob(), {
         status: directResponse.status,
         statusText: directResponse.statusText,
         headers: directResponse.headers,
-      }));
+      });
     } else {
       return await fetch(request);
     }
