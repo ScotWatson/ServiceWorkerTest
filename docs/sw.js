@@ -3,6 +3,8 @@
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+let numFetches = 0;
+
 self.addEventListener("install", function (evt) {
   // only occurs once
   evt.waitUntil(Promise.resolve());
@@ -19,6 +21,7 @@ self.addEventListener("sync", function (evt) {
 });
 
 self.addEventListener("fetch", function (evt) {
+  ++numFetches;
   // if any file is requested that starts with "sw_" and ends with ".js", return "sw.js"
   async function fetchModified() {
     const request = evt.request;
@@ -80,6 +83,9 @@ self.addEventListener("message", function (evt) {
     if (data.action === "numClients") {
       const clients = await self.clients.matchAll();
       evt.source.postMessage("numClients: " + clients.length);
+    }
+    if (data.action === "numFetches") {
+      evt.source.postMessage("numFetches: " + numFetches);
     }
     await sendMessage("Test Broadcast");
   })());
