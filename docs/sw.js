@@ -22,17 +22,12 @@ self.addEventListener("sync", function (evt) {
 
 self.addEventListener("fetch", function (evt) {
   ++numFetches;
-  // if any file is requested that starts with "sw_" and ends with ".js", return "sw.js"
+  // if "test.html" is loaded from any scope, return "/ServiceWorkerTest/test.html"
   async function fetchModified() {
     const request = evt.request;
     const requestURL = new URL(request.url);
-    await sendMessage(requestURL.href);
-    const pathElements = requestURL.pathname.split("/");
-    const resourceName = pathElements[pathElements.length - 1];
-    if (resourceName.startsWith("sw_") && resourceName.endsWith(".js")) {
-      return Response.redirect("https://scotwatson.github.io/ServiceWorkerTest/sw.js");
-/*
-      const newRequest = new Request(requestURL.origin + pathElements.join("/"), {
+    if (requestURL.pathname.endsWith(".js")) {
+      const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
         method: request.method,
         headers: request.headers,
         body: request.body,
@@ -53,15 +48,13 @@ self.addEventListener("fetch", function (evt) {
         statusText: directResponse.statusText,
         headers: directResponse.headers,
       });
-*/
     } else {
       return await fetch(request);
     }
   }
   async function getResponse() {
     await sendMessage(evt.request.url);
-//    const response = await fetch(evt.request);
-    const response = new Response("Hello World", { status: 200 });
+    const response = await fetchModified(evt.request);
     await sendMessage(response.status);
     return response;
   }
