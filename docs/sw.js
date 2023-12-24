@@ -62,7 +62,8 @@ self.addEventListener("fetch", function (evt) {
     await sendMessage(response.status);
     evt.respondWith(response);
   }
-  evt.waitUntil(getResponse());
+  evt.respondWith(Response("Hello World", { status: 200 }));
+//  evt.waitUntil(getResponse());
 });
 
 self.addEventListener("message", function (evt) {
