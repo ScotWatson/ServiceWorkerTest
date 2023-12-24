@@ -44,7 +44,7 @@ self.addEventListener("fetch", function (evt) {
       });
       const directResponse = await fetch(request);
       return new Response(new Blob( [ directResponse.blob(), "\n//", Date().toString() ], {
-        status: directResponse.status.
+        status: directResponse.status,
         statusText: directResponse.statusText,
         headers: directResponse.headers,
       });
