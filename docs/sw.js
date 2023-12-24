@@ -25,7 +25,9 @@ self.addEventListener("fetch", function (evt) {
   // if "test.html" is loaded from any scope, return "/ServiceWorkerTest/test.html"
   async function fetchModified(request) {
     const requestURL = new URL(request.url);
+    await sendMessage(requestURL.pathname);
     if (requestURL.pathname.endsWith("/test.html")) {
+      await sendMessage("Modified Fetch");
       const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
         method: request.method,
         headers: request.headers,
