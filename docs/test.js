@@ -151,7 +151,7 @@ async function start( [ evtWindow ] ) {
       cell1.appendChild(gotoBtn);
       gotoBtn.appendChild(document.createTextNode("goto"));
       gotoBtn.addEventListener("click", function (evt) {
-        window.location = "/ServiceWorkerTest/" + scope + "/test.html";      
+        window.open("/ServiceWorkerTest/" + scope + "/test.html");
       });
       const cell2 = document.createElement("td");
       row.appendChild(cell2);
