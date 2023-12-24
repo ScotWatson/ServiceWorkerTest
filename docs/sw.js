@@ -43,19 +43,19 @@ self.addEventListener("fetch", function (evt) {
       await sendMessage("priority: " + request.priority);
 //      /*
       const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
-//        method: request.method,
-//        headers: request.headers,
-//        body: request.body,
-//        mode: request.mode,
-//        credentials: request.credentials,
-//        cache: request.cache,
-//        redirect: request.redirect,
+        method: request.method,
+        headers: request.headers,
+        body: request.body,
+        mode: "same-origin",
+        credentials: request.credentials,
+        cache: request.cache,
+        redirect: request.redirect,
 //        referrer: request.referrer,
 //        referrerPolicy: request.referrerPolicy,
 //        integrity: request.integrity,
-//        keepalive: request.keepalive,
-//        signal: request.signal,
-//        priority: request.priority,
+        keepalive: request.keepalive,
+        signal: request.signal,
+        priority: request.priority,
       });
       const directResponse = await fetch(request);
 //      */
