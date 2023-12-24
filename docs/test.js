@@ -108,24 +108,59 @@ async function start( [ evtWindow ] ) {
       controllerBtn = createServiceWorkerButton(navigator.serviceWorker.controller);
       pController.appendChild(controllerBtn);
     });
-    const pCreateRegistration = document.createElement("p");
-    document.body.appendChild(pCreateRegistration);
-    pCreateRegistration.appendChild(document.createTextNode("sw_"));
+    const pCreateScope = document.createElement("p");
+    document.body.appendChild(pCreateScope);
+    pCreateScope.appendChild(document.createTextNode("/ServiceWorkerTest/"));
     const inpId = document.createElement("input");
-    pCreateRegistration.appendChild(inpId);
+    pCreateScope.appendChild(inpId);
     inpId.type = "text";
-    pCreateRegistration.appendChild(document.createTextNode(".js"));
-    const createRegistrationBtn = document.createElement("button");
-    pCreateRegistration.appendChild(createRegistrationBtn);
-    createRegistrationBtn.appendChild(document.createTextNode("Create Registration"));
-    createRegistrationBtn.addEventListener("click", function (evt) {
+    const createScopeBtn = document.createElement("button");
+    pCreateScope.appendChild(createScopeBtn);
+    createScopeBtn.appendChild(document.createTextNode("Create Scope"));
+    createScopeBtn.addEventListener("click", function (evt) {
       (async function () {
-        await navigator.serviceWorker.register("/ServiceWorkerTest/sw_" + inpId.value + ".js", {
-          scope: "/ServiceWorkerTest/",
+        await navigator.serviceWorker.register("/ServiceWorkerTest/sw.js", {
+          scope: "/ServiceWorkerTest/" + inpId.value + "/",
         });
-        refreshRegistrationTable();
+        addScopeRow(inpId.value);
       })();
     });
+    const scopeTable = document.createElement("table");
+    document.body.appendChild(scopeTable);
+    const scopeTableHeader = document.createElement("tr");
+    scopeTable.appendChild(scopeTableHeader);
+    const scopeTableHeader0 = document.createElement("th");
+    scopeTableHeader.appendChild(scopeTableHeader0);
+    scopeTableHeader0.appendChild(document.createTextNode("scope"));
+    const scopeTableHeader1 = document.createElement("th");
+    scopeTableHeader.appendChild(scopeTableHeader1);
+    scopeTableHeader1.appendChild(document.createTextNode("goto"));
+    const scopeTableHeader2 = document.createElement("th");
+    scopeTableHeader.appendChild(scopeTableHeader2);
+    scopeTableHeader2.appendChild(document.createTextNode("remove"));
+    function addScopeRow(scope) {
+      const row = document.createElement("tr");
+      scopeTable.appendChild(scopeRow);
+      const cell0 = document.createElement("td");
+      row.appendChild(cell0);
+      cell0.appendChild(document.createTextNode(scope));
+      const cell1 = document.createElement("td");
+      row.appendChild(cell1);
+      const gotoBtn = document.createElement("button");
+      cell1.appendChild(gotoBtn);
+      gotoBtn.appendChild(document.createTextNode("goto"));
+      gotoBtn.addEventListener("click", function (evt) {
+        window.location = "/ServiceWorkerTest/" + scope + "/test.html";      
+      });
+      const cell2 = document.createElement("td");
+      row.appendChild(cell2);
+      const removeBtn = document.createElement("button");
+      cell2.appendChild(removeBtn);
+      removeBtn.appendChild(document.createTextNode("Remove"));
+      removeBtn.addEventListener("click", function (evt) {
+        row.remove();
+      });
+    }
     const refreshRegistrationTableBtn = document.createElement("button");
     document.body.appendChild(refreshRegistrationTableBtn);
     refreshRegistrationTableBtn.appendChild(document.createTextNode("Refresh Registration Table"));
