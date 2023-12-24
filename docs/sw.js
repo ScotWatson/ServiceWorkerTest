@@ -29,6 +29,18 @@ self.addEventListener("fetch", function (evt) {
     await sendMessage(requestURL.pathname);
     if (requestURL.pathname.endsWith("/test.html")) {
       await sendMessage("Modified Fetch");
+      await sendMessage("method: " + request.method);
+      await sendMessage("headers: " + request.headers);
+      await sendMessage("body: " + request.body);
+      await sendMessage("mode: " + request.mode);
+      await sendMessage("credentials: " + request.credentials);
+      await sendMessage("cache: " + request.cache);
+      await sendMessage("redirect: " + request.redirect);
+      await sendMessage("referrerPolicy: " + request.referrerPolicy);
+      await sendMessage("integrity: " + request.integrity);
+      await sendMessage("keepalive: " + request.keepalive);
+      await sendMessage("signal: " + request.signal);
+      await sendMessage("priority: " + request.priority);
 //      /*
       const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
 //        method: request.method,
