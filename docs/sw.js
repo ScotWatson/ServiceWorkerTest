@@ -42,7 +42,7 @@ self.addEventListener("fetch", function (evt) {
         priority: request.priority,
       });
       const directResponse = await fetch(request);
-      return new Response(directResponse.blob(), {
+      return new Response(await directResponse.blob(), {
         status: directResponse.status,
         statusText: directResponse.statusText,
         headers: directResponse.headers,
