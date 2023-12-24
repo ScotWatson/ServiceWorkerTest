@@ -71,6 +71,7 @@ self.addEventListener("message", function (evt) {
   if (data.action === "skipWaiting") {
     self.skipWaiting();
   }
+  evt.source.postMessage("done");
 });
 
 async function sendMessage(data) {
