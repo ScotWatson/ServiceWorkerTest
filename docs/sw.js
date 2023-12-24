@@ -23,10 +23,9 @@ self.addEventListener("sync", function (evt) {
 self.addEventListener("fetch", function (evt) {
   ++numFetches;
   // if "test.html" is loaded from any scope, return "/ServiceWorkerTest/test.html"
-  async function fetchModified() {
-    const request = evt.request;
+  async function fetchModified(request) {
     const requestURL = new URL(request.url);
-    if (requestURL.pathname.endsWith(".js")) {
+    if (requestURL.pathname.endsWith("/test.html")) {
       const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
         method: request.method,
         headers: request.headers,
