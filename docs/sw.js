@@ -23,7 +23,7 @@ self.addEventListener("fetch", function (evt) {
   async function fetchModified() {
     const request = evt.request;
     const requestURL = new URL(request.url);
-    await sendMessage(requestURL);
+    await sendMessage(requestURL.href);
     const pathElements = requestURL.pathname.split("/");
     const resourceName = pathElements[pathElements.length - 1];
     if (resourceName.startsWith("sw_") && resourceName.endsWith(".js")) {
