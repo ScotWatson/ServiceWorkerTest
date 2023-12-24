@@ -123,6 +123,7 @@ async function start( [ evtWindow ] ) {
           scope: "/ServiceWorkerTest/" + inpId.value + "/",
         });
         addScopeRow(inpId.value);
+        refreshRegistrationTable();
       })();
     });
     const scopeTable = document.createElement("table");
@@ -140,7 +141,7 @@ async function start( [ evtWindow ] ) {
     scopeTableHeader2.appendChild(document.createTextNode("remove"));
     function addScopeRow(scope) {
       const row = document.createElement("tr");
-      scopeTable.appendChild(scopeRow);
+      scopeTable.appendChild(row);
       const cell0 = document.createElement("td");
       row.appendChild(cell0);
       cell0.appendChild(document.createTextNode(scope));
