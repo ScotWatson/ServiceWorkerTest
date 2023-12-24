@@ -72,6 +72,14 @@ async function start( [ evtWindow ] ) {
             action: "claim",
           });
         });
+        const clientCountBtn = document.createElement("button");
+        clientCountBtn.appendChild(document.createTextNode("Client Count"));
+        display.appendChild(clientCountBtn);
+        clientCountBtn.addEventListener("click", function () {
+          serviceWorker.postMessage({
+            action: "numClients",
+          });
+        });
       });
       return btn;
     }
