@@ -79,6 +79,7 @@ self.addEventListener("message", function (evt) {
       const clients = await self.clients.matchAll();
       evt.source.postMessage("numClients: " + clients.length);
     }
+    await sendMessage("Test Broadcast");
   })());
 });
 
