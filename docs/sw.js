@@ -28,6 +28,7 @@ self.addEventListener("fetch", function (evt) {
     await sendMessage(requestURL.pathname);
     if (requestURL.pathname.endsWith("/test.html")) {
       await sendMessage("Modified Fetch");
+      /*
       const newRequest = new Request("https://scotwatson.github.io/ServiceWorkerTest/test.html", {
         method: request.method,
         headers: request.headers,
@@ -44,6 +45,8 @@ self.addEventListener("fetch", function (evt) {
         priority: request.priority,
       });
       const directResponse = await fetch(request);
+      */
+      const directResponse = await fetch("https://scotwatson.github.io/ServiceWorkerTest/test.html");
       return new Response(await directResponse.blob(), {
         status: directResponse.status,
         statusText: directResponse.statusText,
