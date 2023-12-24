@@ -57,7 +57,8 @@ self.addEventListener("fetch", function (evt) {
   }
   async function getResponse() {
     await sendMessage(evt.request.url);
-    const response = await fetch(evt.request);
+//    const response = await fetch(evt.request);
+    const response = Response("Hello World", { status: 200 });
     await sendMessage(response.status);
     evt.respondWith(response);
   }
