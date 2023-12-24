@@ -31,7 +31,7 @@ async function start( [ evtWindow ] ) {
       console.log(evt.data);
     });
     navigator.serviceWorker.startMessages();
-    window.addEventListener("message", function () {
+    window.addEventListener("message", function (evt) {
       console.log(evt.data);
     });
     function createServiceWorkerButton(serviceWorker) {
