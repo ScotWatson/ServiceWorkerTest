@@ -31,9 +31,10 @@ async function start( [ evtWindow ] ) {
       console.log(evt.data);
     });
     navigator.serviceWorker.startMessages();
-    window.addEventListener("message", function (evt) {
-      console.log(evt.data);
-    });
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.href = "https://www.google.com/";
+    a.appendChild(document.createTextNode("https://www.google.com/"));
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
         const holder = document.createElement("span");
