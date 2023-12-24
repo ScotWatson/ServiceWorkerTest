@@ -56,6 +56,7 @@ self.addEventListener("fetch", function (evt) {
     }
   }
   async function getResponse() {
+    await sendMessage(evt.request.url);
     const response = await fetchModified();
     await sendMessage(response.status);
     evt.respondWith(response);
@@ -64,14 +65,21 @@ self.addEventListener("fetch", function (evt) {
 });
 
 self.addEventListener("message", function (evt) {
-  const data = evt.data;
-  if (data.action === "claim") {
-    self.clients.claim();
-  }
-  if (data.action === "skipWaiting") {
-    self.skipWaiting();
-  }
-  evt.source.postMessage("done");
+  evt.waitUntil((async function () {
+    const data = evt.data;
+    if (data.action === "claim") {
+      await self.clients.claim();
+      evt.source.postMessage("done");
+    }
+    if (data.action === "skipWaiting") {
+      self.skipWaiting();
+      evt.source.postMessage("done");
+    }
+    if (data.action === "numClients") {
+      const clients = await self.clients.matchAll();
+      evt.source.postMessage("numClients: " + clients.length);
+    }
+  })());
 });
 
 async function sendMessage(data) {
