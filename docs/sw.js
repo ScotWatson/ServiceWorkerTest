@@ -63,6 +63,7 @@ self.addEventListener("fetch", function (evt) {
 //    const response = await fetch(evt.request);
     const response = new Response("Hello World", { status: 200 });
     await sendMessage(response.status);
+    return response;
   }
   evt.respondWith(getResponse());
 });
