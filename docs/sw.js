@@ -23,7 +23,7 @@ self.addEventListener("fetch", function (evt) {
   async function fetchModified() {
     const request = evt.request;
     const requestURL = new URL(request.url);
-    sendMessage(requestURL);
+    await sendMessage(requestURL);
     const pathElements = requestURL.pathname.split("/");
     const resourceName = pathElements[pathElements.length - 1];
     if (resourceName.startsWith("sw_") && resourceName.endsWith(".js")) {
@@ -57,7 +57,7 @@ self.addEventListener("fetch", function (evt) {
   }
   async function getResponse() {
     const response = await fetchModified();
-    sendMessage(response.status);
+    await sendMessage(response.status);
     evt.respondWith(response);
   }
   evt.waitUntil(getResponse());
@@ -73,8 +73,8 @@ self.addEventListener("message", function (evt) {
   }
 });
 
-function sendMessage(data) {
-  const clients = self.clients.matchAll();
+async function sendMessage(data) {
+  const clients = await self.clients.matchAll();
   for (const client of clients) {
     client.postMessage(data);
   }
