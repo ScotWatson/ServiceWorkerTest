@@ -89,6 +89,14 @@ async function start( [ evtWindow ] ) {
             action: "numFetches",
           });
         });
+        const skipWaitingBtn = document.createElement("button");
+        skipWaitingBtn.appendChild(document.createTextNode("Skip Waiting"));
+        display.appendChild(skipWaitingBtn);
+        skipWaitingBtn.addEventListener("click", function () {
+          serviceWorker.postMessage({
+            action: "skipWaiting",
+          });
+        });
       });
       return btn;
     }
