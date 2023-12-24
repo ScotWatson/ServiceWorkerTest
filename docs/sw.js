@@ -30,7 +30,7 @@ self.addEventListener("fetch", function (evt) {
         method: request.method,
         headers: request.headers,
         body: request.body,
-        mode: request.mode,
+//        mode: request.mode,
         credentials: request.credentials,
         cache: request.cache,
         redirect: request.redirect,
