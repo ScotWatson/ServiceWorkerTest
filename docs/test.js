@@ -30,6 +30,9 @@ async function start( [ evtWindow ] ) {
     navigator.serviceWorker.addEventListener("message", function (evt) {
       console.log(evt.data);
     });
+    window.addEventListener("message", function () {
+      console.log(evt.data);
+    });
     function createServiceWorkerButton(serviceWorker) {
       if (serviceWorker === null) {
         const holder = document.createElement("span");
