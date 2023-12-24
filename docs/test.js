@@ -80,6 +80,14 @@ async function start( [ evtWindow ] ) {
             action: "numClients",
           });
         });
+        const fetchCountBtn = document.createElement("button");
+        fetchCountBtn.appendChild(document.createTextNode("Fetch Count"));
+        display.appendChild(fetchCountBtn);
+        fetchCountBtn.addEventListener("click", function () {
+          serviceWorker.postMessage({
+            action: "numFetches",
+          });
+        });
       });
       return btn;
     }
