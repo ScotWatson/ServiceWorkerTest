@@ -47,7 +47,7 @@ self.addEventListener("fetch", function (evt) {
         status: directResponse.status,
         statusText: directResponse.statusText,
         headers: directResponse.headers,
-      });
+      }));
     } else {
       return await fetch(request);
     }
